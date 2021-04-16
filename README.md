@@ -1,2 +1,2 @@
-# MERN-Bootcamp2
+# mern-bootcamp
 Created with CodeSandbox
