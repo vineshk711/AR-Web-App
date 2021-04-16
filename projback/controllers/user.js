@@ -41,7 +41,7 @@ exports.userPurchasedList = (req, res) => {
   Order.find({ user: req.profile._id })
     .populate("user", "_id name")
     .exec((err, orders) => {
-      if (err) {
+      if (err || !orders) {
         return res.status(400).json({
           error: "This account has no Order yet!"
         });
