@@ -50,3 +50,33 @@ exports.userPurchasedList = (req, res) => {
       res.json(orders);
     });
 };
+
+// middleware for updating orders automatically into order array in user model
+exports.pushOrderInPurchaseList = (req, res, next) => {
+  const purchases = [];
+  req.body.products.forEach((product) => {
+    purchases.push({
+      _id: product._id,
+      name: product.name,
+      description: product.description,
+      category: product.category,
+      quantity: product.quantity,
+      amount: req.body.order.amount,
+      transaction_id: req.body.order.transaction_id
+    });
+  });
+  // Store the above array to DB
+  User.findOneAndUpdate(
+    { _id: req.profile._id },
+    { $push: { purchases: purchases } },
+    { new: true },
+    (err, purchases) => {
+      if (err) {
+        return res.status(400).json({
+          error: "Unable to update order array"
+        });
+      }
+      next();
+    }
+  );
+};
