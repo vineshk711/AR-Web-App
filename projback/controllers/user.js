@@ -38,14 +38,15 @@ exports.updateUser = (req, res) => {
 };
 
 exports.userPurchasedList = (req, res) => {
-  Order.find({ user: req.profile._id })
+  Order.orderCollection
+    .find({ user: req.profile._id })
     .populate("user", "_id name")
     .exec((err, orders) => {
       if (err || !orders) {
-        return res.status(400).json({
-          error: "This account has no Order yet!"
+        res.status(400).json({
+          error: "You have no order yet!"
         });
       }
-      return res.json(orders);
+      res.json(orders);
     });
 };
