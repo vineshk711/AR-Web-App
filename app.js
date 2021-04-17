@@ -8,6 +8,7 @@ const cors = require("cors");
 // importing routes
 const authRouters = require("./projback/routes/auth");
 const userRouters = require("./projback/routes/user");
+const categoryRouters = require("./projback/routes/category");
 
 // connecting DB
 const app = express();
@@ -34,6 +35,7 @@ app.use(cors());
 // routes
 app.use("/api", authRouters);
 app.use("/api", userRouters);
+app.use("/api", categoryRouters);
 
 // starting server
 app.listen(port, () => {
