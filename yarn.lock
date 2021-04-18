@@ -1277,7 +1277,7 @@ form-data@~2.3.2:
     combined-stream "^1.0.6"
     mime-types "^2.1.12"
 
-formidable@^1.2.1:
+formidable@1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/formidable/-/formidable-1.2.2.tgz#bf69aea2972982675f00865342b982986f6b8dd9"
   integrity sha512-V8gLm+41I/8kguQ4/o1D3RIHRmhYFG4pnNyonvua+40rqcEmT4+V71yaZ3B457xbbgCsCfjSPi65u/W6vK1U5Q==
@@ -2246,6 +2246,11 @@ load-json-file@^2.0.0:
     parse-json "^2.2.0"
     pify "^2.0.0"
     strip-bom "^3.0.0"
+
+loadsh@0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/loadsh/-/loadsh-0.0.4.tgz#5314babd12bb13315dde024a4ca70758c5489d2d"
+  integrity sha512-U+wLL8InpfRalWrr+0SuhWgGt10M4OyAk6G8xCYo2rwpiHtxZkWiFpjei0vO463ghW8LPCdhqQxXlMy2qicAEw==
 
 locate-path@^2.0.0:
   version "2.0.0"
