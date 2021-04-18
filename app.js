@@ -9,6 +9,7 @@ const cors = require("cors");
 const authRouters = require("./projback/routes/auth");
 const userRouters = require("./projback/routes/user");
 const categoryRouters = require("./projback/routes/category");
+const productRouters = require("./projback/routes/product");
 
 // connecting DB
 const app = express();
@@ -36,6 +37,7 @@ app.use(cors());
 app.use("/api", authRouters);
 app.use("/api", userRouters);
 app.use("/api", categoryRouters);
+app.use("/api", productRouters);
 
 // starting server
 app.listen(port, () => {

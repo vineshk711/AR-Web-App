@@ -19,7 +19,7 @@ router.param("categoryId", getCategoryById);
 // the routes goes here
 // create
 router.post(
-  "category/create/:userId",
+  "/category/create/:userId",
   isSignedIn,
   isAuthenticated,
   isAdmin,
