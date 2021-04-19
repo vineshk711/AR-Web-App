@@ -1,6 +1,6 @@
 const Product = require("../models/category");
 const formidable = require("formidable");
-const loadsh = require("loadsh");
+const _ = require("loadsh");
 const fs = require("fs");
 
 exports.getProductById = (req, res, next, id) => {
@@ -42,7 +42,7 @@ exports.createProduct = (req, res) => {
         });
       }
       product.photo.data = fs.readFileSync(file.photo.path);
-      product.photo.conteentType = file.photo.type;
+      product.photo.contentType = file.photo.type;
     }
     // dave data to DB
     product.save((err, product) => {
