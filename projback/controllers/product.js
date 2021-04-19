@@ -1,40 +1,44 @@
-const Product = require("../models/category");
+const Product = require("../models/product");
 const formidable = require("formidable");
-const _ = require("loadsh");
+const _ = require("lodash");
 const fs = require("fs");
 
 exports.getProductById = (req, res, next, id) => {
-  Product.findById(id).exec((err, product) => {
-    if (err) {
-      return res.status(400).json({
-        error: "No product found in DB"
-      });
-    }
-    req.product = product;
-    next();
-  });
+  Product.findById(id)
+    .populate("category")
+    .exec((err, product) => {
+      if (err) {
+        return res.status(400).json({
+          error: "Product not found in DB"
+        });
+      }
+      req.product = product;
+      next();
+    });
 };
 
 exports.createProduct = (req, res) => {
-  const form = new formidable.IncomingForm();
+  let form = new formidable.IncomingForm();
   form.keepExtensions = true;
+
   form.parse(req, (err, fields, file) => {
     if (err) {
       return res.status(400).json({
-        error: "Problem with Image"
+        error: "Problem with image"
       });
     }
-    // destructuring of fields
+    //destructure the fields
     const { name, description, price, category, stock } = fields;
+
     if (!name || !description || !price || !category || !stock) {
       return res.status(400).json({
-        error: "Please fill all Fields"
+        error: "Please include all fields"
       });
     }
 
     let product = new Product(fields);
 
-    // handle file here
+    //handle file here
     if (file.photo) {
       if (file.photo.size > 3000000) {
         return res.status(400).json({
@@ -44,15 +48,13 @@ exports.createProduct = (req, res) => {
       product.photo.data = fs.readFileSync(file.photo.path);
       product.photo.contentType = file.photo.type;
     }
-    // dave data to DB
+    // console.log(product);
+
+    //save to the DB
     product.save((err, product) => {
-      if (!product) {
-        return res.json({
-          error: "Select a file to upload"
-        });
-      } else if (err) {
-        return res.status(400).json({
-          error: "Saving product in DB failed!"
+      if (err) {
+        res.status(400).json({
+          error: "Saving product in DB failed"
         });
       }
       res.json(product);
