@@ -47,11 +47,10 @@ exports.createProduct = (req, res) => {
     // dave data to DB
     product.save((err, product) => {
       if (!product) {
-        res.json({
+        return res.json({
           error: "Select a file to upload"
         });
-      }
-      if (err) {
+      } else if (err) {
         return res.status(400).json({
           error: "Saving product in DB failed!"
         });
