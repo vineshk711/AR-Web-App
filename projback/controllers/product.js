@@ -9,7 +9,7 @@ exports.getProductById = (req, res, next, id) => {
     .exec((err, product) => {
       if (err) {
         return res.status(400).json({
-          error: "Product not found in DB"
+          error: "Product not found"
         });
       }
       req.product = product;
@@ -24,7 +24,7 @@ exports.createProduct = (req, res) => {
   form.parse(req, (err, fields, file) => {
     if (err) {
       return res.status(400).json({
-        error: "Problem with image"
+        error: "problem with image"
       });
     }
     //destructure the fields
@@ -54,7 +54,7 @@ exports.createProduct = (req, res) => {
     product.save((err, product) => {
       if (err) {
         res.status(400).json({
-          error: "Saving product in DB failed"
+          error: "Saving tshirt in DB failed"
         });
       }
       res.json(product);
