@@ -7,7 +7,8 @@ const {
   getProduct,
   photo,
   updateProduct,
-  deleteProduct
+  deleteProduct,
+  getAllProducts
 } = require("../controllers/product");
 const { isSignedIn, isAuthenticated, isAdmin } = require("../controllers/auth");
 const { getUserById } = require("../controllers/user");
@@ -49,5 +50,6 @@ router.delete(
 );
 
 // listing the product according to user need
+router.get("/products", getAllProducts);
 
 module.exports = router;

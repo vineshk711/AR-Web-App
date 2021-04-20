@@ -3,6 +3,7 @@ const formidable = require("formidable");
 const _ = require("lodash");
 const fs = require("fs");
 const { runInNewContext } = require("vm");
+const { sortBy } = require("lodash");
 
 exports.getProductById = (req, res, next, id) => {
   Product.findById(id)
@@ -129,4 +130,22 @@ exports.updateProduct = (req, res) => {
       res.json(product);
     });
   });
+};
+
+// customised product listing
+exports.getAllProducts = (req, res) => {
+  let limit = req.query.limit ? parseInt(req.query.limit) : 8;
+  let sortBy = req.query.sortBy ? req.query.sortBy : "_id";
+  Product.find()
+    .sort([[sortBy, "asc"]])
+    .select("-photo")
+    .limit(limit)
+    .exec((err, products) => {
+      if (err) {
+        res.status(400).json({
+          error: "No product found!"
+        });
+      }
+      res.json(products);
+    });
 };
