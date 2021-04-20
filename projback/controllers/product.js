@@ -4,6 +4,7 @@ const _ = require("lodash");
 const fs = require("fs");
 const { runInNewContext } = require("vm");
 const { sortBy } = require("lodash");
+const category = require("../models/category");
 
 exports.getProductById = (req, res, next, id) => {
   Product.findById(id)
@@ -149,6 +150,17 @@ exports.getAllProducts = (req, res) => {
       }
       res.json(products);
     });
+};
+
+exports.getAllUniqueCategories = (req, res) => {
+  Product.distinct("category", {}, (err, category) => {
+    if (err) {
+      res.status(400).json({
+        error: "No category found!"
+      });
+    }
+    res.json(category);
+  });
 };
 
 // automatically manage stock and sold handled in frontend
