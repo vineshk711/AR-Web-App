@@ -10,6 +10,7 @@ const authRouters = require("./projback/routes/auth");
 const userRouters = require("./projback/routes/user");
 const categoryRouters = require("./projback/routes/category");
 const productRouters = require("./projback/routes/product");
+const orderRouters = require("./projback/routes/order");
 
 // connecting DB
 const app = express();
@@ -38,6 +39,7 @@ app.use("/api", authRouters);
 app.use("/api", userRouters);
 app.use("/api", categoryRouters);
 app.use("/api", productRouters);
+app.use("/api", orderRouters);
 
 // starting server
 app.listen(port, () => {
