@@ -163,7 +163,7 @@ exports.getAllUniqueCategories = (req, res) => {
   });
 };
 
-// automatically manage stock and sold handled in frontend
+// automatically manage stock and sold, will be handeled in frontend
 exports.updateStock = (req, res, next) => {
   let myOperations = req.body.order.products.map((prod) => {
     return {
