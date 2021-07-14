@@ -33,14 +33,14 @@ export const signin = user => {
 
 export const authenticate = (data, next) => {
     if(typeof window != "undefined"){
-        localStorage.setItem("jwt", json.stringify(data))
+        localStorage.setItem("jwt", JSON.stringify(data))
     }
     next()
 }
 
-export const signout = next => {
+export const signout = (data, next) => {
     if(typeof window != "undefined"){
-        localStorage.setItem("jwt", json.stringify(data))
+        localStorage.setItem("jwt", JSON.stringify(data))
     }
     next()
 
