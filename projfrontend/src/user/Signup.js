@@ -62,16 +62,16 @@ const Signup = () => {
                             onChange={handleChange("password")}
                             type="password" />
                         </div>
-                        <button className="btn btn-success btn-block">Submit</button>
+                        <button onClick={onSubmit} className="btn btn-success btn-block">Submit</button>
                     </form>
                 </div>
             </div>
         )
     }
     return(
-        <Base title="Sing up Page" description="Apge for user to sign up!">
+        <Base title="Sing up Page" description="Page for user to sign up!">
             {signUpForm()}
-            {/* <p>hi</p> */}
+            <p>{JSON.stringify(values)}</p>
         </Base>
     )
 }

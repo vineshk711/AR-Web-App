@@ -1,4 +1,3 @@
-import { response } from "express"
 import {API} from "../../backend" // this is address of bakend http://localhost/5000/api
 
 export const signup = user => {
@@ -6,7 +5,7 @@ export const signup = user => {
         method: "POST",
         headers: {
             Accept: "application/json",
-            "ContentType": "application/json"
+            "Content-Type": "application/json"
         },
         body: JSON.stringify(user)
     })
@@ -21,7 +20,7 @@ export const signin = user => {
         method: "POST",
         headers: {
             Accept: "application/json",
-            "ContentType": "application/json"
+            "Content-Type": "application/json"
         },
         body: JSON.stringify(user)
     })
@@ -38,9 +37,9 @@ export const authenticate = (data, next) => {
     next()
 }
 
-export const signout = (data, next) => {
+export const signout =  next => {
     if(typeof window != "undefined"){
-        localStorage.setItem("jwt", JSON.stringify(data))
+        localStorage.removeItem("jwt")
     }
     next()
 
