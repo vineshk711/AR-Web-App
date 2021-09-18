@@ -6,11 +6,11 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
 // importing routes
-const authRouters = require("./projback/routes/auth");
-const userRouters = require("./projback/routes/user");
-const categoryRouters = require("./projback/routes/category");
-const productRouters = require("./projback/routes/product");
-const orderRouters = require("./projback/routes/order");
+const authRouters = require("./backend/routes/auth");
+const userRouters = require("./backend/routes/user");
+const categoryRouters = require("./backend/routes/category");
+const productRouters = require("./backend/routes/product");
+const orderRouters = require("./backend/routes/order");
 
 // connecting DB
 const app = express();
