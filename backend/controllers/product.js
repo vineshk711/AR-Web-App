@@ -33,7 +33,7 @@ exports.createProduct = (req, res) => {
     //destructure the fields
     const { name, description, price, category, stock } = fields;
 
-    if (!name || !description || !price || !category || !stock) {
+    if (!name || !description || !price) {
       return res.status(400).json({
         error: "Please include all fields"
       });
@@ -57,7 +57,8 @@ exports.createProduct = (req, res) => {
     product.save((err, product) => {
       if (err) {
         res.status(400).json({
-          error: "Saving tshirt in DB failed"
+          error: "Saving product in DB failed",
+          err
         });
       }
       res.json(product);

@@ -15,7 +15,7 @@ exports.signup = (req, res) => {
   user.save((err, user) => {
     if (err) {
       return res.status(400).json({
-        error: "User already exist or not able to save user in DB"
+        error: "Email already registered!"
       });
     }
     res.json({
@@ -26,7 +26,7 @@ exports.signup = (req, res) => {
   });
 };
 
-exports.signin = (req, res) => {
+exports.signin = async (req, res) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -36,7 +36,7 @@ exports.signin = (req, res) => {
     });
   }
   const { email, password } = req.body;
-  User.findOne({ email }, (err, user) => {
+  await User.findOne({ email }, (err, user) => {
     if (err) {
       return res.status(400).json({
         error: "Something went wrong"
@@ -44,12 +44,12 @@ exports.signin = (req, res) => {
     }
     if (!user) {
       return res.status(400).json({
-        error: "User not found in DB"
+        error: "Email not registered"
       });
     }
     if (!user.auth(password)) {
-      res.status(401).json({
-        err: "Invalid password!"
+      return res.status(401).json({
+        error: "Invalid password!"
       });
     }
     // create token
@@ -60,7 +60,7 @@ exports.signin = (req, res) => {
 
     // send request to font end
     const { _id, name, email, role } = user;
-    return res.json({
+    return res.status(200).json({
       token,
       user: { _id, name, email, role }
     });
@@ -95,7 +95,7 @@ exports.isAdmin = (req, res, next) => {
   const role = req.profile.role === 0;
   if (role) {
     return res.status(403).json({
-      error: "Only Admin are allowed to do so!"
+      error: "Access Denied, Only Admins are allowed!"
     });
   }
   next();

@@ -8,11 +8,11 @@ router.post(
   [
     check("name")
       .isLength({ min: 3 })
-      .withMessage("Name must be atleast 3 char long"),
-    check("email").isEmail().withMessage("Enter a valid e-mail"),
+      .withMessage("Name too short"),
+    check("email").isEmail().withMessage("Enter a valid Email"),
     check("password")
       .isLength({ min: 5 })
-      .withMessage("Password length shuld be atleast 5")
+      .withMessage("Password too short")
   ],
   signup
 );

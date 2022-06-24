@@ -36,6 +36,9 @@ const productSchema = new mongoose.Schema(
     photo: {
       data: Buffer,
       contentType: String
+    },
+    threeModelLink: {
+      type: String
     }
   },
   { timestamps: true }

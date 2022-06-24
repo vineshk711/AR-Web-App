@@ -16,8 +16,8 @@ export const signup = user => {
     .catch(err =>  console.log(err))
 }
 
-export const signin = user => {
-    return fetch(`${API}/signin`, {
+export const signin = async user => {
+    return await fetch(`${API}/signin`, {
         method: "POST",
         headers: {
             Accept: "application/json",
@@ -56,8 +56,13 @@ export const isAuthenticated = () => {
         return false
     }
     if(localStorage.getItem("jwt")) {
+        // console.log(JSON.parse(localStorage.getItem("jwt")))
         return JSON.parse(localStorage.getItem("jwt"))
     }else{
         return false
     }
+}
+
+export const getAllProducts = () => {
+    
 }
